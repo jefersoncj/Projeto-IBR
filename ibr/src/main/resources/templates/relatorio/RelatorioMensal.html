@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+	
+	
+<head>
+	<title>Balanço Anual</title>
+</head>
+
+<body>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Relatório Mensal</h1>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="container-fluid">
+	<form method="GET" >
+							
+			<div class="row">
+				<div class="form-group bw-requerid col-sm-4">
+					<label for="combo-mesAno" class="control-label">Relatório  Mensal</label>
+					<select id="combo-mesAno" class="selectpicker show-tick form-control" data-live-search="true" data:url="@{/relatorios/resumo-mensal/}" onchange="AW.showLoadingComponent(); return true;" >
+						<option value="">Selecione o mês/ano</option>
+					 	<option th:each="mesAno : ${mesesAnos}" th:value="|${mesAno.mes}-${mesAno.ano}" th:text="${mesAno.mesAno}">mesAno</option>
+				    </select>
+				</div>
+			</div>
+			
+	</form>
+	
+	<div class="row">
+	
+	<div  class= "col-sm-6">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${mesAnoFormatado == null}? '' : |Entradas ${mesAnoFormatado}">Entradas</h1>
+		</div>
+		 	
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table table-hover js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th >Ref.</th>
+						<th >Nome</th>
+						<th class="text-right">Valor</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr  th:class="${item.tipo}" th:each="item : ${entradasMensal}">
+						<td th:text="${item.referencia}">1.1.1</td>
+						<td th:text="${item.nome}">Auxilio Pastoral</td>
+						<td class="text-right" th:text="${{item.valor}}">1.00</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+				<div class="panel panel-info">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${mesAnoFormatado == null}? '' : |Totais ${mesAnoFormatado}">Saídas</h1>
+		</div>
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th class="grupo">TIPO</th>
+						<th class="text-right grupo">Valor</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr class="bg-success">
+						<td class="grupo">ENTRADAS</td>	
+						<td class="text-right grupo" th:text="${{totalEntrada}}">1.1.1</td>
+					</tr>
+					<tr class="bg-danger">
+						<td class="grupo">SAÍDAS</td>	
+						<td class="text-right grupo" th:text="${{totalSaida}}">1.00</td>
+					</tr>
+					<tr class="bg-info">
+						<td class="grupo">SALDO</td>	
+						<td class="text-right grupo " th:text="${totalEntrada == null}? '' : ${{totalEntrada - totalSaida}}">1.00</td>
+					</tr>
+					<tr class="bg-warning">
+						<td class="grupo">SALDO MÊS ANTERIOR</td>	
+						<td class="text-right grupo " th:text="${{saldoMesAnterior}}">1.00</td>
+					</tr>
+					<tr>
+						<td class="grupo">SALDO ATUAL</td>	
+						<td class="text-right grupo " th:text="${saldoMesAnterior == null}? '' :${{(totalEntrada - totalSaida) + saldoMesAnterior}}">1.00</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+		
+	</div>
+	
+	<div  class= "col-sm-6">
+		<div class="panel panel-danger">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${mesAnoFormatado == null}? '' : |Saídas ${mesAnoFormatado}">Saídas</h1>
+		</div>
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table    table-hover  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th>Ref.</th>
+						<th>Nome</th>
+						<th class="text-right">Valor</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr  th:class="${item.tipo}" th:each="item : ${saidasMensal}">
+						<td th:text="${item.referencia}">1.1.1</td>
+						<td th:text="${item.nome}">Auxilio Pastoral</td>
+						<td class="text-right" th:text="${{item.valor}}">1.00</td>
+
+						
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	</div>
+</div>
+		
+	</div>
+
+</section>
+<th:block layout:fragment="javascript-extra">
+
+	<script th:src="@{/javascripts/relatorioMensal.js}"></script>
+	
+</th:block>
+</body>
+</html>

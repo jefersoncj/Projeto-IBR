@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+<head>
+	
+</head>
+<body>
+
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-10">
+						<h1>Cadastro de trasnfência</h1>
+					</div>
+					
+					<div class="col-xs-2">
+						<div class="aw-page-header-controls">
+							<a class="btn  btn-primary" th:href="@{/grupos}">
+								<i class="fa fa-search"></i> <span class="hidden-xs  hidden-sm">Extrato</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container-fluid">
+	
+	
+		<form method="POST" th:object="${transferencia}" th:action="@{/trasnferencias/nova}" class="form-vertical  js-form-loading" >
+			<ibr:message/>	
+				<div class="row">
+					<div class="form-group bw-requerid col-sm-4" ibr:classforerror="*{contaADebitar}">
+						<label for="combo-contaADebitar" class="control-label">Conta a debitar</label>
+						<select id="combo-contaADebitar" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{contaADebitar}">
+							<option value="">Selecione  conta</option>
+							<option th:each="conta : ${contas}" th:value="${conta.codigo}" th:text="|${conta.nome}, saldo = ${{conta.saldo}}|">conta</option>
+						</select>
+				   	 </div>
+					 <div class="form-group bw-requerid col-sm-4" ibr:classforerror="*{contaACreditar}">
+						<label for="combo-grupoACreditar" class="control-label">Conta a creditar</label>
+						<select id="combo-grupoACreditar" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{contaACreditar}">
+							<option value="">Selecione a Conta</option>
+							<option th:each="conta : ${contas}" th:value="${conta.codigo}" th:text="|${conta.nome}, saldo = ${{conta.saldo}}|">conta</option>
+						</select>
+				   	 </div>
+					 <div class="form-group bw-requerid col-sm-4" ibr:classforerror="valor">
+					 	<label class="control-label" for="Valor">Valor</label>
+						<div class="input-group">
+							<div class="input-group-addon">R$</div>
+						    	<input type="text" id="Valor" class="form-control js-decimal" th:field="*{valor}">
+						</div>
+					 </div>				   	 
+				</div>
+		
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+				
+			</div>
+	
+		</form>
+	</div>
+
+</section>
+</body>
+</html>

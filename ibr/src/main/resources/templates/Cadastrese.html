@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:ibr="http://ibr.algaworks.com">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Cadastro</title>
+
+
+  	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/ibr.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/ibr.css}"/>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-datepicker.min.css}"/>
+	
+	<script th:src="@{/layout/javascripts/jquery.js}"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="aw-layout-simple-page">
+
+  <div class="aw-layout-simple-cadastro__container">
+
+<form method="POST" th:object="${usuario}" th:action="@{/cadastro/novo}">
+	<div class="aw-simple-cadastro">
+		<div class="aw-simple-logo">
+			<img alt="AlgaWorks" th:src="@{/images/logo-gray.png}"/>
+			
+			<div class="aw-simple-panel__message">
+				Por favor, informe seus dados.
+			</div>
+		</div>
+		<div class="aw-simple-panel__box">
+			<ibr:message/>
+			
+			<input type="hidden" th:field="*{codigo}"/>
+			
+			<div class="row">
+				
+				<div class="form-group  col-sm-12  bw-required" ibr:classforerror="nome">
+					<label for="nome" class="control-label">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
+				</div>
+				
+				<div class="form-group  col-sm-12 bw-required" ibr:classforerror="sobrenome">
+					<label for="sobre-nome" class="control-label">Sobrenome</label>
+					<input type="text" class="form-control" id="sobre-nome" th:field="*{sobrenome}"/>
+				</div>
+				
+				<div class="form-group  col-sm-12 bw-required" ibr:classforerror="nomeIgreja">
+					<label for="nome-igreja" class="control-label">Instituição</label>
+					<input type="text" class="form-control" id="nome-igreja" th:field="*{nomeIgreja}"/>
+				</div>	
+				
+				<div class="form-group  col-sm-12  bw-required" ibr:classforerror="email">
+					<label for="email" class="control-label">E-mail</label>
+					<input type="text" class="form-control" id="email" th:field="*{email}"/>
+				</div>
+				<div class="form-group  col-sm-12" ibr:classforerror="senha" th:classappend="${usuario.novo} ? bw-required">
+					<label for="senha" class="control-label">Senha</label> 
+					<input type="password" class="form-control" id="senha" th:field="*{senha}"/>
+				</div>
+				
+				<div class="form-group  col-sm-12" ibr:classforerror="confirmacaoSenha">
+					<label for="confirmacaoSenha" class="control-label">Confirmação de senha</label> 
+					<input type="password" class="form-control" id="confirmacaoSenha" th:field="*{confirmacaoSenha}"/>
+				</div>
+				
+				<!--  <input type="hidden" th:field="*{grupo.nome}" th:value= "Administrador"/>-->
+			</div>
+			
+			
+			<div class="form-group">
+				<button type="submit" class="btn  btn-primary btn-lg  aw-btn-full-width">Cadastrar</button>  
+			</div>
+		</div>
+			<div class="aw-simple-panel aw-space">Já sou cadastrado <a th:href="@{/}">Fazer Login</a>.</div>
+	</div>
+		</form>
+
+  </div>
+
+<script th:src="@{/layout/javascripts/vendors.js}"></script>
+<script th:src="@{/layout/javascripts/algaworks.js}"></script>
+
+
+<script th:src="@{/javascripts/vendors/jquery.masknumber.min.js}"></script>
+<script th:src="@{/javascripts/vendors/jquery.mask.min.js}"></script>
+
+<script th:src="@{/javascripts/vendors/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js}"></script>
+
+<script th:src="@{/javascripts/vendors/numeral.min.js}"></script>
+<script th:src="@{/javascripts/vendors/pt-br.min.js}"></script>
+
+<script th:src="@{/javascripts/ibr.js}"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/easy-autocomplete.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/easy-autocomplete.themes.min.css}"/>
+</head>
+<body>
+	
+<section layout:fragment="conteudo">
+
+<div class="page-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-10">
+				<h1>
+					Saída
+				</h1>
+			</div>
+			
+			<div class="col-xs-2">
+				<div class="aw-page-header-controls">
+					<a class="btn btn-primary" th:href="@{/saidas}">
+						<i class="fa fa-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+
+				<form method="POST" th:object="${movimento}" th:action="@{/saidas/nova}">
+					<ibr:message/>	
+						   <div class="row">
+						     <div class="form-group bw-requerid col-sm-4">
+				                <label class="control-label" for="Data">Data saída</label>
+				                <div class="input-group date">
+				                  <input type="text" name="Data" id="Data" class="form-control date js-date" th:field="*{dataMovimento}"
+				                  data-provide="datepicker"  data-date-language="pt-BR"
+								  data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom">
+				                  <div class="input-group-addon">
+				                    <span class="glyphicon glyphicon-th"></span>
+				                  </div>
+				                </div>
+				              </div>
+				              <div class="form-group bw-requerid col-sm-4">
+				                <label class="control-label" for="Valor">Valor</label>
+				                <div class="input-group">
+				                  <div class="input-group-addon">R$</div>
+				                  <input type="text" id="Valor" class="form-control js-decimal" th:field="*{valor}">
+				                </div>
+				              </div>
+				              <div class="form-group bw-requerid col-sm-4">
+						      	<label for="combo-grupo" class="control-label">Conta</label>
+						        <select id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{conta}">
+						         <option value="">Selecione a Conta</option>
+								 <option th:each="conta : ${contas}" th:value="${conta.codigo}" th:text="|${conta.nome}, saldo = ${{conta.saldo}}|">conta</option>
+						        </select>
+						   	  </div>
+				            </div>
+				            
+							<div class="form-group  bw-requerid">
+								<label for="input-item-nome" class="control-label">Centro de custo</label>
+								 <input type="hidden" id="inputHiddenItemSelecionado" th:field="*{item.codigo}" />
+								 <input type="hidden" id="inputHiddenCentroCustoSelecionado" th:field="*{centroCusto}" />
+								<input id="input-item-nome" type="text" class="form-control js-nome-item-input" data:url="@{/saidas}"/>
+							</div>
+		
+						
+							<div class="form-group">
+								<label class="control-label" for="Observacao">Observação</label>
+								<textarea id="Observacao" class="form-control" rows="3" th:field="*{observacao}"></textarea>
+							</div>
+					
+					<div class="form-group">
+						<button class="btn  btn-primary" type="submit">Salvar</button>
+						<a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a>
+					</div>
+			</form>
+	
+</div>
+
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/jquery.easy-autocomplete.min.js}"></script>
+	<script th:src="@{/javascripts/item.autocomplete.js}"></script>
+	
+	
+</th:block>
+<script type="text/javascript">
+$(document).ready(function(){
+	  $('#Data').mask('00/00/0000');
+	});
+</script>
+
+</body>
+</html>
+
+	

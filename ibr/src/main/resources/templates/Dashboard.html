@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:brewer="http://brewer.algaworks.com"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" th:href="@{layout/stylesheets/smallbox.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>Dashboard</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	
+		<div class="row">
+		  <div class="col-lg-3 col-xs-12 col-sm-6">
+	          <!-- small box -->
+	          <div class="small-box bg-green">
+	            <div class="inner">
+	              <h3>R$ [[${{entradasNoAno}}]]</h3>
+	
+	              <p>Entradas Ano</p>
+	            </div>
+	            <div class="icon">
+	              <i class="ion ion-social-usd"></i>
+	            </div>
+	            <a th:href="@{/entradas/nova}" class="small-box-footer">Nova entrada <i class="fa fa-arrow-circle-right"></i></a>
+	          </div>
+	        </div>
+		  <div class="col-lg-3 col-xs-12 col-sm-6">
+	          <!-- small box -->
+	          <div class="small-box bg-red">
+	            <div class="inner">
+	              <h3>R$ [[${{saidasNoAno}}]]</h3>
+	
+	              <p>Saídas Ano</p>
+	            </div>
+	            <div class="icon">
+	              <i class="ion ion-social-usd"></i>
+	            </div>
+	            <a th:href="@{/saidas/nova}" class="small-box-footer">Nova saída <i class="fa fa-arrow-circle-right"></i></a>
+	          </div>
+	        </div>
+		  <div class="col-lg-3 col-xs-12 col-sm-6">
+	          <!-- small box -->
+	          <div class="small-box bg-green">
+	            <div class="inner">
+	              <h3>R$ [[${{entradasNoMes}}]]</h3>
+	
+	              <p>Entradas Mês</p>
+	            </div>
+	            <div class="icon">
+	              <i class="ion ion-social-usd"></i>
+	            </div>
+	            <a th:href="@{/relatorios}" class="small-box-footer">Resumo mensal <i class="fa fa-arrow-circle-right"></i></a>
+	          </div>
+	        </div>
+		  <div class="col-lg-3 col-xs-12 col-sm-6">
+	          <!-- small box -->
+	          <div class="small-box bg-red">
+	            <div class="inner">
+	              <h3>R$ [[${{saidasNoMes}}]]</h3>
+	
+	              <p>Saídas Mês</p>
+	            </div>
+	            <div class="icon">
+	              <i class="ion ion-social-usd"></i>
+	            </div>
+	            <a th:href="@{/balanco}" class="small-box-footer">Balanço anual <i class="fa fa-arrow-circle-right"></i></a>
+	          </div>
+	        </div>
+		  <div class="col-lg-12 col-xs-12">
+	          <!-- small box -->
+	          <div class="small-box bg-aqua dashTotais">
+	     <div class="table-responsive  bw-tabela-simples">
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th class="text-right">Janeiro</th>
+						<th class="text-right">Fevereiro</th>
+						<th class="text-right">Março</th>
+						<th class="text-right">Abril</th>
+						<th class="text-right">Maio</th>
+						<th class="text-right">Junho</th>
+						<th class="text-right">Julho</th>
+						<th class="text-right">Agosto</th>
+						<th class="text-right">Setembro</th>
+						<th class="text-right">Outubro</th>
+						<th class="text-right">Novembro</th>		
+						<th class="text-right">Dezembro</th>
+						<th class="text-right">Total</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr class="grupo" th:each="item : ${balancoTotal}">
+						<td th:text="${item.tipo == 'C'}? 'ENTRADAS': 'SAÍDAS'">Auxilio Pastoral</td>
+						<td class="text-right " th:text="${{item.valorJan}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorFev}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMar}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAbr}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMai}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJun}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJul}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAgo}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorSet}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorOut}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorNov}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorDez}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJan + item.valorFev + item.valorMar + item.valorAbr + item.valorMai + 
+						item.valorJun + item.valorJul + item.valorAgo + item.valorSet +  item.valorOut + item.valorNov + item.valorDez}}">1.00</td>	
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+		<div class="small-box-footer" >Saldo atual R$ <span class="js_valor_mes">[[${{entradasNoAno - saidasNoAno}}]]</span></div>
+	           
+	          </div>
+	        </div>
+
+        </div>	
+        
+		
+	<!--  	<div class="row">
+			<div class="col-sm-4">
+				<div class="aw-box-verde">
+					<div class="aw-box__icon-verde">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value ">R$<span class="js_valor">[[${{entradasNoAno}}]]</span></div>
+					<div class="aw-box__title">Tota entrada Ano</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="aw-box-vermelho">
+					<div class="aw-box__icon-vermelho">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value ">R$<span class="js_valor">[[${{saidasNoAno}}]]</span></div>
+					<div class="aw-box__title">Tota saída Ano</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="aw-box-azul">
+					<div class="aw-box__icon-azul">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value js_valor_ano_class">R$<span class="js_valor_ano">[[${{entradasNoAno - saidasNoAno}}]]</span></div>
+					<div class="aw-box__title">Saldo ano</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="col-sm-4">
+				<div class="aw-box-verde">
+					<div class="aw-box__icon-verde">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value ">R$<span class="js_valor">[[${{entradasNoMes}}]]</span></div>
+					<div class="aw-box__title">Tota entrada Mês</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="aw-box-vermelho">
+					<div class="aw-box__icon-vermelho">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value ">R$<span class="js_valor">[[${{saidasNoMes}}]]</span></div>
+					<div class="aw-box__title">Tota saída Mês</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="aw-box-azul">
+					<div class="aw-box__icon-azul">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value js_valor_mes_class" >R$<span class="js_valor_mes">[[${{entradasNoMes-saidasNoMes}}]]</span></div>
+					<div class="aw-box__title">Saldo Mês</div>
+				</div>
+			</div>
+		</div>
+-->
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Entradas e saídas ano</h2>
+					</div>
+					<div class="aw-graph-box__content">
+						<!-- <div class="aw-graph-box__no-data">
+							<i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span>
+						</div> -->
+						<div>
+							<canvas id="graficoVendasPorMes" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/Chart.min.js}"></script>
+	<script th:src="@{/javascripts/dashboard.graficos.js}"></script>
+	<script th:src="@{/javascripts/dashboard.valores.js}"></script>
+</th:block>
+
+</html>

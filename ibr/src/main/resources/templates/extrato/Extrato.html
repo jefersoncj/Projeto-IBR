@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+<body>
+
+
+<section layout:fragment="conteudo">
+
+
+<div class="page-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-10">
+				<h1>
+					Extrato por conta
+				</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+<form method="GET" th:object="${movimentoContaFilter}">
+<ibr:message/>	
+   <div class="row">
+				<div class="form-group bw-requerid col-sm-4">
+					<label class="control-label" for="Data">Data Inicial</label>
+					<div class="input-group date">
+						<input type="text"  id="DataInicial" 
+							class="form-control date js-date"  th:field="*{dataInicio}"
+							data-provide="datepicker" 
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom" required>
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group bw-requerid col-sm-4">
+					<label class="control-label" for="Data">Data Final</label>
+					<div class="input-group date">
+						<input type="text" id="DataFinal" th:field="*{dataFim}"
+							class="form-control date js-date" 
+							data-provide="datepicker" 
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom" required>
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+				</div>
+				 <div class="form-group bw-requerid col-sm-4">
+					<label for="combo-grupo" class="control-label">Conta</label>
+					<select required id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{conta}">
+						<option value="">Selecione a Conta</option>
+						<option th:each="conta : ${contas}" th:value="${conta.codigo}" th:text="|${conta.nome}, saldo = ${{conta.saldo}}|">conta</option>
+					</select>
+			   	 </div>
+		</div>
+	  
+	
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+</form>
+
+	<div class="table-responsive bw-tabela-extrato" >
+		<table id="tabela-saidas" class="table  table-hover table-striped js-sticky-table">
+			<thead class="aw-table-header-solid">
+				<tr>
+					<th class="text-center">Data</th>
+					<th >Centro de custo</th>
+					<th >Conta</th>
+					<th class="text-right">Valor</th>
+					<th class="text-center">tipo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="saida : ${pagina}" th:class="${saida.tipo.descricao == 'Crédito' }? 'success' : 'danger'">
+					<td class="text-center"th:text="${{saida.dataMovimento}}">01/09/2016</td>
+					<td th:text="${saida.centroCusto}">Pastorado - Auxílio Pastoral - Pr. Marcos</td>
+					<td th:text="${saida.conta.nome}">Caixa</td>
+					<td class="text-right" th:text="|R$ ${{saida.valor}}|">Valor</td>
+					<td class="text-center" th:text="${saida.tipo}">C</td>
+				</tr>
+		
+			</tbody>
+		</table>
+	</div>
+			<div class="row text-right">
+			 	<div class="col-xs-offset-5 col-xs-7">
+					<strong th:text="|Saldo anterior: R$ ${{saldoAnterior}}|"> $1200.00</strong>
+				</div>
+				<div class="col-xs-offset-6 col-xs-6">
+					<strong th:text="|Saldo final: R$ ${{totalListMovimento}}|"> $1200.00</strong>
+				</div>
+			</div> 
+
+</div>
+
+</section>
+
+</body>
+</html>
+
+	

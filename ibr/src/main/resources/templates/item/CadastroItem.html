@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+	
+<body>
+
+
+<section layout:fragment="conteudo">
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Cadastro de Itens</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-primary" th:href="@{/itens}">
+							<i class="fa fa-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa Item</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="container-fluid">
+
+	
+	
+	<form method="POST" th:object="${item}"  class="form-vertical  js-form-loading" th:action="@{/itens/novo}">
+		<ibr:message/>
+		
+			<div class="  form-group  bw-required" ibr:classforerror="tipo">
+					<label for="origem" class="control-label">Tipo</label>
+					<div>
+						<th:block th:each="tipo: ${tipos}">
+							<div class="radio  radio-inline">
+								<input th:id="|id_${tipo}|" type="radio" th:value="${tipo}" th:field="*{tipo}"> 
+								<label th:for="|id_${tipo}|" th:text="${tipo.descricao}">Entrada</label>
+							</div>
+						</th:block>
+					</div>
+			</div>
+		
+		<div class="form-group  bw-requerid" ibr:classforerror="nome">
+			<label for="input-item-nome" class="control-label">Nome item</label>
+			<input id="input-item-nome" type="text" class="form-control" th:field="*{nome}"/>
+		</div>
+		
+		<div class="form-group bw-requerid" ibr:classforerror="grupoConta">
+	      <label for="combo-grupo" class="control-label">Grupo</label>
+	        <select id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{grupoConta}">
+	         <option value="">Selecione o Grupo</option>
+			 <option th:each="grupoConta : ${grupoContas}" th:value="${grupoConta.codigo}" th:text="${grupoConta.nome}">Pastorado</option>
+	        </select>
+	    </div>
+
+	    <div class="form-group bw-requerid" ibr:classforerror="subGrupo">
+	      <label for="combo-subGrupo" class="control-label">SubGrupo</label>
+	      
+			<div class="bw-field-action">	
+				 <input type="hidden" id="inputHiddenSubGrupoSelecionado" th:value="*{subGrupo} != null ? *{subGrupo.codigo}"/>
+	       		 <select id="combo-subGrupo" class="selectpicker show-tick form-control" data-live-search="true" data:url="@{/subgrupos}" th:field="*{subGrupo}">
+	      		
+	      		 </select>
+	      		 
+	      		 <div class="bw-field-action__icon  js-img-loading" style="display: none">
+							<img th:src="@{/images/mini-loading.gif}"/>
+				  	</div>
+	      	</div>
+	    </div>
+	
+		
+		<div class="form-group">
+			<button class="btn  btn-primary button" type="submit">Salvar</button>
+			<a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a>
+		</div>
+
+	</form>	
+</div>
+
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/item.combo-grupo-subgrupo.js}"></script>
+</th:block>
+
+</body>
+</html>
+
+	

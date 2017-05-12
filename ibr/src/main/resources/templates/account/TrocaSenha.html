@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.algaworks.com">
+
+<head>
+	<title>Troca senha</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1 th:inline="text">Troca de senha usuário - [[${usuario.nome}]]</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-primary" th:href="@{/usuarios}">
+							<i class="fa fa-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="POST" th:object="${usuarioTrocaSenhaFilter}" 
+				th:action="@{/account/troca-senha}">
+			<ibr:message/>
+			 <div class="row">
+				<div class="form-group  col-sm-3 bw-required" ibr:classforerror="senhaAtualDigitada">
+					<label for="senha-atual" class="control-label">Senha Atual</label> 
+					<input type="password" class="form-control" id="senha-atual" th:field="*{senhaAtualDigitada}"/>
+
+				</div>
+				<div class="form-group  col-sm-3 bw-required " ibr:classforerror="novaSenha">
+					<label for="senha" class="control-label">Nova senha</label> 
+					<input type="password" class="form-control" id="senha" th:field="*{novaSenha}"/>
+				</div>
+				
+				<div class="form-group  col-sm-3 bw-required" ibr:classforerror="confirmacaoSenha">
+					<label for="confirmacaoSenha" class="control-label">Confirmação de senha</label> 
+					<input type="password" class="form-control" id="confirmacaoSenha" th:field="*{confirmacaoSenha}"/>
+				</div>
+			</div>	
+			<div class="form-group">
+					<button type="submit" class="btn  btn-primary">Salvar</button>				
+			</div>			
+					</form>
+	</div>
+</section>
+
+</html>

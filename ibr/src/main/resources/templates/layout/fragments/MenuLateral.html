@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:ibr="http://ibr.algaworks.com">
+	
+<body>
+<aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
+	<div class="aw-layout-sidebar__content">
+
+    	<nav class="aw-menu  js-menu">
+      		<ul class="aw-menu__list">
+
+        		<li class="aw-menu__item" ibr:menu="@{/}">
+          			<a th:href="@{/}"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+        		</li>
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="glyphicon glyphicon-plus-sign"></i><span>Entrada</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/entradas/nova}">
+			            	<a th:href="@{/entradas/nova}">Nova entrada</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/entradas/*}">
+			            	<a th:href="@{/entradas}">Pesquisa entrada</a>
+			            </li>
+			        </ul>
+			    </li>
+			    
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="glyphicon glyphicon-minus-sign"></i><span>Saída</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/saidas/nova}">
+			            	<a th:href="@{/saidas/nova}">Nova saída</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/saidas/*}">
+			            	<a th:href="@{/saidas}">Pesquisa saída</a>
+			            </li>
+			        </ul>
+			    </li>
+
+
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-database"></i><span>Cadastros</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+          				 <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/contas.*}">
+			            	<a th:href="@{/contas}">Contas</a>
+			             </li>
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/grupos.*}">
+			            	<a th:href="@{/grupos}">Grupos</a>
+			            </li>
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/subgrupos.*}">
+			            	<a th:href="@{/subgrupos}">Subgrupo</a>
+			            </li>
+			             <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/itens.*}">
+			            	<a th:href="@{/itens}">Itens</a>
+			            </li>
+          			</ul>
+        		</li>	
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-user"></i><span>Usuários</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+         				<li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/usuarios/novo}">
+			            	<a th:href="@{/usuarios/novo}">Nova usuário</a>
+			            </li>
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/usuarios/*}">
+			            	<a th:href="@{/usuarios}">Pesquisa usuário</a>
+			            </li>
+          			</ul>
+        		</li>	
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-file-pdf-o"></i><span>Relatórios</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			         	<li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/relatorios/balanco.*}">
+			            	<a th:href="@{/relatorios/balanco}">Balanço</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" ibr:menu="@{/relatorios/resumo-mensal.*}">
+			            	<a th:href="@{/relatorios/resumo-mensal}">Resumo Mensal</a>
+			            </li>
+          			</ul>
+        		</li>
+      		</ul>
+    	</nav>
+	</div>
+</aside>
+</body>
+</html>

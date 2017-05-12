@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+<body>
+
+
+<section layout:fragment="conteudo">
+
+
+<div class="page-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-10">
+				<h1>
+					Saída
+				</h1>
+			</div>
+			
+			<div class="col-xs-2">
+				<div class="aw-page-header-controls">
+					<a class="btn btn-primary" th:href="@{/saidas/nova}">
+						<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Nova Saída</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+<form method="GET" th:object="${movimentoFilter}">
+
+   <div class="row">
+				<div class="form-group bw-requerid col-sm-4">
+					<label class="control-label" for="Data">Data Inicial</label>
+					<div class="input-group date">
+						<input type="text"  id="DataInicial"
+							class="form-control date js-date"  th:field="*{dataInicio}"
+							data-provide="datepicker" 
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group bw-requerid col-sm-4">
+					<label class="control-label" for="Data">Data Final</label>
+					<div class="input-group date">
+						<input type="text" id="DataFinal" th:field="*{dataFim}"
+							class="form-control date js-date" 
+							data-provide="datepicker" 
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+				</div>
+				 <div class="form-group bw-requerid col-sm-4">
+					<label for="combo-grupo" class="control-label">Conta</label>
+					<select id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{conta}">
+						<option value="">Selecione a Conta</option>
+						<option th:each="conta : ${contas}" th:value="${conta.codigo}" th:text="|${conta.nome}, saldo = ${{conta.saldo}}|">conta</option>
+					</select>
+			   	 </div>
+		</div>
+	 <div class="row">
+	   <div class="form-group bw-requerid col-sm-4">
+	      <label for="combo-grupo" class="control-label">Grupo Conta</label>
+	        <select id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{item.subGrupo.grupoConta}">
+	         <option value="">Selecione o Grupo</option>
+			 <option th:each="grupoConta : ${grupoContas}" th:value="${grupoConta.codigo}" th:text="${grupoConta.nome}">Pastorado</option>
+	        </select>
+	    </div>
+
+		<div class="form-group bw-requerid col-sm-4">
+	      <label for="combo-subGrupo" class="control-label">Subgrupo</label>
+	      <select id="combo-subGrupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{item.subGrupo}">
+	         <option value="">Selecione o subgrupo</option>
+			 <option th:each="subGrupo: ${subGrupos}" th:value="${subGrupo.codigo}" th:text="${subGrupo.nome}">Pastorado</option>
+	        </select>
+	    </div>
+	    
+	    <div class="form-group bw-requerid col-sm-4">
+	      <label for="combo-item" class="control-label">Item</label>
+	      <select id="combo-item" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{item}">
+	         <option value="">Selecione o Item</option>
+			 <option th:each="item: ${itens}" th:value="${item.codigo}" th:text="${item.nome}">Pastorado</option>
+	        </select>
+	    </div>
+	    
+	  </div>
+	  
+	
+			<button type="submit" class="btn button btn-primary">Pesquisar</button>
+</form>
+
+	<div class="table-responsive  bw-tabela-simples" >
+		<table id="tabela-saidas" class="table table-hover js-sticky-table">
+			<thead class="aw-table-header-solid">
+				<tr>
+					<th class="text-center">Data</th>
+					<th class="text-center">Referência</th>
+					<th >Centro de custo</th>
+					<th >Conta</th>
+					<th>Obs</th>
+					<th class="text-right">Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="saida : ${pagina}">
+					<td class="text-center"th:text="${{saida.dataMovimento}}">01/09/2016</td>
+					<td class="text-center"th:text="${saida.item.referencia}">1.1.1</td>
+					<td th:text="${saida.centroCusto}">Pastorado - Auxílio Pastoral - Pr. Marcos</td>
+					<td th:text="${saida.conta.nome}">Caixa</td>
+					<td th:text="${saida.observacao}">Auxílio</td>
+					<td class="text-right" th:text="|R$ ${{saida.valor}}|">R$2.200,00</td>
+				</tr>
+		
+			</tbody>
+		</table>
+	</div>
+			<div class="row text-right">
+				<div class="col-xs-offset-6 col-xs-6">
+					<strong th:text="|Total: R$ ${{totalListMovimento}}|"> $1200.00</strong>
+				</div>
+			</div> 
+
+</div>
+
+</section>
+
+</body>
+</html>
+
+	

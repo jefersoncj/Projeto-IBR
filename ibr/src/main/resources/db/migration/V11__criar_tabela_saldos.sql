@@ -1,0 +1,7 @@
+
+CREATE TABLE saldos (
+    codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    data DATETIME NOT NULL,
+    saldo DECIMAL(10,2),
+    tenant_id VARCHAR(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

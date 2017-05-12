@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context>
+    <Resource name="jdbc/ibrDB" auth="Container" 
+            factory="org.apache.naming.factory.BeanFactory"
+            type="com.mchange.v2.c3p0.ComboPooledDataSource"
+            driverClass="com.mysql.jdbc.Driver"
+            jdbcUrl="jdbc:mysql://localhost/ibr?useSSL=false"
+            user="root"
+            password="jan_2233" 
+            initialPoolSize="5" 
+            minPoolSize="5"
+            maxPoolSize="5" 
+     />
+</Context>

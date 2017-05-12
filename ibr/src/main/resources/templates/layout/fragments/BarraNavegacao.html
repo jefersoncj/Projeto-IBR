@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+	
+<body>
+<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar" th:fragment="navbar">
+	<div class="container-fluid">
+
+    <div class="navbar-header">
+     	<a class="navbar-brand  hidden-xs" href="#">
+     	
+        	<img alt="AlgaWorks" th:src="@{/images/logo.png}"/>
+      	</a>
+
+      	<ul class="nav  navbar-nav">
+        	<li>
+          		<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
+        	</li>
+      	</ul>
+    </div>
+
+  <!--   <ul class="nav navbar-nav  navbar-right">
+    	<li>
+    		<p class="navbar-text" th:text="${#authentication.principal.usuario.nome}">Usuário</p>
+    	</li>
+    
+    	<li>
+        	<a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
+      	</li> 
+    </ul>
+     --> 
+
+     <ul class="nav navbar-nav  navbar-right">
+		<li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:inline="text">[[${#authentication.principal.usuario.nome}]] <span class="space"></span><span class="fa  fa-user"></span></a>       
+         <!--  <a href="#" class="dropdown-toggle" data-toggle="dropdown"  th:text="${#authentication.principal.usuario.nome}">Iasmani Pinazo <span class="glyphicon glyphicon-user pull-right"></span></a> -->
+          <ul class="dropdown-menu">
+            <li><a href="#"  th:inline="text">[[${#authentication.principal.usuario.email}]] <span class="glyphicon glyphicon-envelope pull-right"></span></a></li>
+            <li class="divider"></li>
+            <li><a th:href="@{/account/troca-senha}">Trocar senha<span class="fa fa-unlock-alt pull-right"></span></a></li>
+            <li class="divider"></li>
+            <li><a th:href="@{/logout}">Sair <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+</nav>
+
+</body>
+</html>

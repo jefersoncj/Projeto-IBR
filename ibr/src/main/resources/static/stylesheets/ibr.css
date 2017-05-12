@@ -1,0 +1,123 @@
+/*
+######################
+# UTILIDADES
+######################
+*/
+.bw-glyphicon-large {
+	font-size: 18px;
+}
+
+.bw-required > .control-label:after {
+	content: "*";
+}
+
+.negativo {
+	color: #D9534F;
+}
+
+
+
+/*
+######################
+# COMPONENTES
+######################
+*/
+
+/* Field Action */
+.bw-field-action {
+	display: flex;
+}
+
+.bw-field-action__icon {
+	margin: 6px 0 0 5px;
+}
+
+/* Tabela Simples */
+.bw-tabela-simples {
+	margin-top: 15px;
+}
+
+.bw-tabela-extrato {
+	margin-top: 15px;
+}
+
+.bw-tabela-simples table tr th {
+	border-bottom-width: 1px;
+}
+.bw-tabela-extrato table tr td {
+    padding: 10px;
+    vertical-align: middle;
+}
+.bw-tabela-simples table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    padding: 10px;
+    vertical-align: middle;
+}
+/*
+###################
+# PÁGINAS DO SISTEMA
+###################
+*/
+
+/* Colunas comuns */
+.table-col-acoes {
+	width: 80px;
+}
+
+
+
+/* Colunas - Pesquisa de usuários */
+.table-usuarios-col-status {
+	width: 30px;
+	text-align: center;
+}
+
+
+/*
+######################################
+# CUSTOMIZAÇÃO DE COMPONENTES
+######################################
+*/
+
+.checkbox input[type="checkbox"]:checked + input + label::after {
+    font-family: 'FontAwesome';
+    content: "\f00c"; 
+}
+
+/* Easy Autocomplete */
+.easy-autocomplete input {
+	border-radius: 2px !important;
+}
+
+.easy-autocomplete-container ul li {
+	font-size: 1em !important;
+	padding: 0px 5px !important;
+}
+
+/* Box */
+.negativo .aw-box__value {
+	color: red;
+}
+
+/*
+######################################
+# FONTE DE ITENS
+######################################
+*/
+
+.grupo{
+	font-weight: bold;
+}
+
+.subGrupo{
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.item{
+	font-size: 0.8em;
+}
+
+
+

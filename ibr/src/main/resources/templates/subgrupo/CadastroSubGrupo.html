@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.abia.com">
+	
+<head>
+	
+</head>
+<body>
+
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Cadastro de Subgrupos</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-primary" th:href="@{/subgrupos}">
+							<i class="fa fa-search"></i> <span class="hidden-xs  hidden-sm">Pesquisa Subgrupo</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="container-fluid">
+
+
+	<form method="POST" th:object="${subGrupo}" th:action="@{/subgrupos/novo}" class="form-vertical  js-form-loading">
+		<ibr:message/>
+		
+		<div class="form-group bw-requerid" ibr:classforerror="nome">
+			<label for="input-subGrupo-nome" class="control-label">Nome</label>
+			<input id="input-subGrupo-nome" type="text" class="form-control" th:field="*{nome}"/>
+		</div>
+
+		<div class="form-group bw-requerid" ibr:classforerror="grupoConta">
+	      <label for="combo-grupo" class="control-label">Grupo</label>
+	      <select id="combo-grupo" class="selectpicker show-tick form-control" data-live-search="true" th:field="*{grupoConta}">
+	         <option value="">Selecione o Grupo</option>
+			 <option th:each="grupoConta : ${grupoContas}" th:value="${grupoConta.codigo}" th:text="${grupoConta.nome}">Pastorado</option>
+	        </select>
+	    </div>
+		
+		<div class="form-group">
+			<button class="btn  btn-primary" type="submit">Salvar</button>
+			<a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a>
+			
+		</div>
+
+	</form>
+</div>
+
+</section>
+
+</body>
+</html>

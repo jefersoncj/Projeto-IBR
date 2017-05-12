@@ -1,0 +1,1 @@
+INSERT INTO usuario (nome,sobrenome,nome_igreja, email, senha, ativo,tenant_id) VALUES ('Admin','Admin','Batista', 'admin@ibr.com', '$2a$10$g.wT4R0Wnfel1jc/k84OXuwZE02BlACSLfWy6TycGPvvEKvIm86SG', 1,1)

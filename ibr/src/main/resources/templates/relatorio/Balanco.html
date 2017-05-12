@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:ibr="http://ibr.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+	
+	
+<head>
+	<title>Balanço Anual</title>
+</head>
+
+<body>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Balanço anual</h1>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="container-fluid">
+	<form method="GET" >
+							
+			<div class="row">
+				<div class="form-group bw-requerid col-sm-4">
+					<label for="combo-ano" class="control-label">Ano balanço</label>
+					<select id="combo-ano" class="selectpicker show-tick form-control" data-live-search="true" data:url="@{/relatorios/balanco/}" onchange="AW.showLoadingComponent(); return true;">
+						<option value="">Selecione o Ano</option>
+					 	<option th:each="ano : ${anos}" th:value="${ano}" th:text="${ano}">conta</option>
+				    </select>
+				</div>
+			</div>
+			
+	</form>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${ano == null}? '' : |Entradas ${ano}">Entradas</h1>
+		</div>
+		   	
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table table-hover js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th >Ref.</th>
+						<th >Nome</th>
+						<th class="text-right">Janeiro</th>
+						<th class="text-right">Fevereiro</th>
+						<th class="text-right">Março</th>
+						<th class="text-right">Abril</th>
+						<th class="text-right">Maio</th>
+						<th class="text-right">Junho</th>
+						<th class="text-right">Julho</th>
+						<th class="text-right">Agosto</th>
+						<th class="text-right">Setembro</th>
+						<th class="text-right">Outubro</th>
+						<th class="text-right">Novembro</th>		
+						<th class="text-right">Dezembro</th>
+						<th class="text-right">Total</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr  th:class="${item.tipo}" th:each="item : ${balancoEntrada}">
+						<td th:text="${item.referencia}">1.1.1</td>
+						<td th:text="${item.nome}">Auxilio Pastoral</td>
+						<td class="text-right" th:text="${{item.valorJan}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorFev}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMar}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAbr}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMaio}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJun}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJul}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAgo}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorSet}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorOut}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorNov}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorDez}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJan + item.valorFev + item.valorMar + item.valorAbr + item.valorMaio + 
+						item.valorJun + item.valorJul + item.valorAgo + item.valorSet +  item.valorOut + item.valorNov + item.valorDez}}">1.00</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+		<div class="panel panel-danger">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${ano == null}? '' : |Saídas ${ano}">Saídas</h1>
+		</div>
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table    table-hover  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th>Ref.</th>
+						<th>Nome</th>
+						<th class="text-right">Janeiro</th>
+						<th class="text-right">Fevereiro</th>
+						<th class="text-right">Março</th>
+						<th class="text-right">Abril</th>
+						<th class="text-right">Maio</th>
+						<th class="text-right">Junho</th>
+						<th class="text-right">Julho</th>
+						<th class="text-right">Agosto</th>
+						<th class="text-right">Setembro</th>
+						<th class="text-right">Outubro</th>
+						<th class="text-right">Novembro</th>		
+						<th class="text-right">Dezembro</th>
+						<th class="text-right">Total</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr  th:class="${item.tipo}" th:each="item : ${balancoSaida}">
+						<td th:text="${item.referencia}">1.1.1</td>
+						<td th:text="${item.nome}">Auxilio Pastoral</td>
+						<td class="text-right" th:text="${{item.valorJan}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorFev}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMar}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAbr}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMaio}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJun}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJul}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAgo}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorSet}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorOut}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorNov}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorDez}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJan + item.valorFev + item.valorMar + item.valorAbr + item.valorMaio + 
+						item.valorJun + item.valorJul + item.valorAgo + item.valorSet +  item.valorOut + item.valorNov + item.valorDez}}">1.00</td>	
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading">
+		   <h1 class="panel-title text-center" th:text="${ano == null}? '' : |Totais ${ano}">Totais</h1>
+		</div>
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table    table-hover  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th></th>
+						<th class="text-right">Janeiro</th>
+						<th class="text-right">Fevereiro</th>
+						<th class="text-right">Março</th>
+						<th class="text-right">Abril</th>
+						<th class="text-right">Maio</th>
+						<th class="text-right">Junho</th>
+						<th class="text-right">Julho</th>
+						<th class="text-right">Agosto</th>
+						<th class="text-right">Setembro</th>
+						<th class="text-right">Outubro</th>
+						<th class="text-right">Novembro</th>		
+						<th class="text-right">Dezembro</th>
+						<th class="text-right">Total</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr class="grupo" th:each="item : ${balancoTotal}">
+						<td th:text="${item.tipo == 'C'}? 'ENTRADAS': 'SAÍDAS'">Auxilio Pastoral</td>
+						<td class="text-right " th:text="${{item.valorJan}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorFev}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMar}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAbr}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorMai}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJun}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJul}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorAgo}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorSet}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorOut}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorNov}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorDez}}">1.00</td>
+						<td class="text-right" th:text="${{item.valorJan + item.valorFev + item.valorMar + item.valorAbr + item.valorMai + 
+						item.valorJun + item.valorJul + item.valorAgo + item.valorSet +  item.valorOut + item.valorNov + item.valorDez}}">1.00</td>	
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+		
+
+		
+		
+	</div>
+
+</section>
+<th:block layout:fragment="javascript-extra">
+
+	<script th:src="@{/javascripts/buscaBalancoPorAno.js}"></script>
+	
+</th:block>
+</body>
+</html>

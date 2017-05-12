@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+	version="2.1">
+	
+	<named-native-query name="Movimento.balancoTotal" result-set-mapping="balancoTotal">
+		<query>
+		SELECT m.tipo, SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento) = 1 THEN m.valor ELSE 0 END) valorJan,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 2 THEN m.valor ELSE 0 END) valorFev,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 3 THEN m.valor ELSE 0 END) valorMar,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 4 THEN m.valor ELSE 0 END) valorAbr,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 5 THEN m.valor ELSE 0 END) valorMai,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 6 THEN m.valor ELSE 0 END) valorJun,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 7 THEN m.valor ELSE 0 END) valorJul,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 8 THEN m.valor ELSE 0 END) valorAgo,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 9 THEN m.valor ELSE 0 END) valorSet,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 10 THEN m.valor ELSE 0 END) valorOut,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 11 THEN m.valor ELSE 0 END) valorNov,
+                                   SUM(CASE WHEN EXTRACT(MONTH FROM m.data_movimento)  = 12 THEN m.valor ELSE 0 END) valorDez
+		FROM movimento AS m WHERE year(data_movimento) = :ano and tenant_id = :tenantId
+		GROUP BY m.tipo 
+	    </query>
+	</named-native-query>
+	
+	<sql-result-set-mapping name="balancoTotal">
+		<constructor-result target-class="com.abia.ibr.dto.BalancoTotal">
+			<column name="tipo" class="java.lang.String"/>
+			<column name="valorJan" class="java.lang.Double"/>
+			<column name="valorFev" class="java.lang.Double"/>
+			<column name="valorMar" class="java.lang.Double"/>
+			<column name="valorAbr" class="java.lang.Double"/>
+			<column name="valorMai" class="java.lang.Double"/>
+			<column name="valorJun" class="java.lang.Double"/>
+			<column name="valorJul" class="java.lang.Double"/>
+			<column name="valorAgo" class="java.lang.Double"/>
+			<column name="valorSet" class="java.lang.Double"/>
+			<column name="valorOut" class="java.lang.Double"/>
+			<column name="valorNov" class="java.lang.Double"/>
+			<column name="valorDez" class="java.lang.Double"/>
+		</constructor-result>
+	</sql-result-set-mapping>
+	
+	
+	<!-- <sql-result-set-mapping name="porOrigemMapping">
+		<constructor-result target-class="com.algaworks.brewer.dto.VendaOrigem">
+			<column name="mes" class="java.lang.String"/>
+			<column name="total_nacional" class="java.lang.Integer"/>
+			<column name="total_internacional" class="java.lang.Integer"/>
+		</constructor-result>
+	</sql-result-set-mapping> -->
+	
+	
+	
+</entity-mappings>
