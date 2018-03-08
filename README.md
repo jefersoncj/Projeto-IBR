@@ -7,7 +7,7 @@ Sistema financeiro IBR
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
 
-<img src="https://drive.google.com/file/d/1sM8PPdlzUCpMy52TNBvlKrpsJLoieE87/view?usp=sharing" alt="Login" style="width:100%;">
+<img src="https://drive.google.com/open?id=1sM8PPdlzUCpMy52TNBvlKrpsJLoieE87" alt="Login" style="width:100%;">
 
 <p>Resize the browser window.</p>
 
