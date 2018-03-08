@@ -11,9 +11,7 @@ Sistema financeiro IBR
 
 <img src="https://raw.githubusercontent.com/jefersoncj/Estudos-java/master/dash.png" style="width:100%;">
 
-<p>Resize the browser window.</p>
-
-<p>When the width property is set in a percentage value, the image will scale up and down when resizing the browser window.</p>
+<img src="https://raw.githubusercontent.com/jefersoncj/Estudos-java/master/imagens/entrada.png" style="width:100%;">
 
 </body>
 </html>
