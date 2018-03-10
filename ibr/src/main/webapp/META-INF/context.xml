@@ -7,7 +7,7 @@
             driverClass="com.mysql.jdbc.Driver"
             jdbcUrl="jdbc:mysql://localhost/ibr?useSSL=false"
             user="root"
-            password="jan_2233" 
+            password="" 
             initialPoolSize="5" 
             minPoolSize="5"
             maxPoolSize="5" 
